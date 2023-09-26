@@ -69,7 +69,7 @@
                 position:relative;
                 top:12px;
                 left: 25px;
-                width:245px;
+                width:270px;
                 height:30px;
                 text-indent: 10px;
                 font-family: Arial, Helvetica, sans-serif;
@@ -78,23 +78,8 @@
                 border:1px solid rgb(240,240,240);
                 border-bottom:1px solid rgb(180,180,180);
             }
-           	a.addfriend
-            {
-            	position:absolute;
-            	top:70px;
-            	right:25px;
-            	padding:5px;
-            	height:30px;
-            	border-radius:4px;
-            	border-bottom:1px solid rgb(180,180,180);
-            	text-decoration:none;
-            	background-color: rgb(240,240,240);
-            }
-            a.addfriend:hover
-            {
-
-            	background-color: rgb(200,200,200);
-            }
+            div.contact
+            {}
         </style> 
     </head>
     <body>
@@ -104,10 +89,10 @@
             <div class="chatcol">
                 <c:forEach var="message" items="${messages}">
                 	<c:if test="${message.getSender_nickname().equals(user.getNickname())}">
-                		<div style="padding-right:30px">${message.getContent()}</div>
+                		<div style=" padding-right:30px">${message.getContent()}</div>
                 	</c:if>
       	            <c:if test="${message.getSender_nickname().equals(friend.getNickname())}">
-                		<div style="padding-left:30px">${message.getContent()}</div>
+                		<div style=" padding-left:30px">${message.getContent()}</div>
       	            </c:if>
                 </c:forEach>
             </div>
@@ -116,7 +101,7 @@
                 <form:form action="TODO" method="post" modelAttribute="key">
                     <input type="search" name="key" placeholder="Cerca o inizia una chat">
                 </form:form>
-                <a class="addfriend" href="addfriend">+</a>
+                    <a class="btn" href="addfriend"></a>
                 <div class="contactlist">
      				<c:forEach var="friend" items="${user.getAllFriends()}">
      					<a href="openchat?id=${friend.getId()}">${friend.getNickname()}</a>

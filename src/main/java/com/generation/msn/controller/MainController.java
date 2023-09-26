@@ -55,7 +55,7 @@ public class MainController
 	}
 	
 	@GetMapping("/homepage")
-	public String homepage(Model model)
+	public String homepage()
 	{
 		return "homepage";
 	}
@@ -127,7 +127,10 @@ public class MainController
 			model.addAttribute("errormessage", "Profilo già esistente");
 			return "registration";
 		}
-		model.addAttribute("user", user);
+		user = userRepo.save(user);
+		User u=userRepo.findById(user.getId()).get();
+		System.out.println(user.toString());
+		model.addAttribute("user", u);
 		return "redirect:/";
 	}
 }

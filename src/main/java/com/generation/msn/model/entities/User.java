@@ -26,9 +26,9 @@ public class User extends BaseEntity
 	private String profile_img;
 	
 	@OneToMany(mappedBy = "user1", fetch = FetchType.EAGER)
-	List<Friendship> friendshipsSender; 
+	List<Friendship> friendshipsSender = new ArrayList<Friendship>(); 
 	@OneToMany(mappedBy = "user2", fetch = FetchType.EAGER)
-	List<Friendship> friendshipsReciver;
+	List<Friendship> friendshipsReciver=new ArrayList<Friendship>();;
 	
 	
 	
