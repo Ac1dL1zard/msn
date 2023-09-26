@@ -108,6 +108,7 @@
                     <input type="text" name="password" type="password" placeholder="Inserisci password">
                     <input class="submit" type="submit" value="Accedi">
                 </form:form>
+                <a href="/register"><button>Registrati</button></a>
                 <div class="contactlist">
                     <div class="message">
                         ${errormessage}
