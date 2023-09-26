@@ -104,8 +104,8 @@
             </div>
             <div class="contactcol">
                 <h4 style="padding-left:25px;padding-top:8px"><b>Cerca amico</b></h4>
-                <form:form action="login" method="post" modelAttribute:"email">
-                    <input type="search" name="email" placeholder="Inserisci email">
+                <form:form action="login" method="post" modelAttribute="mail">
+                    <input type="search" name="mail" placeholder="Inserisci email">
                     <input class="submit" type="submit" value="Aggiungi">
                 </form:form>
                 <a href="homepage"></a>
