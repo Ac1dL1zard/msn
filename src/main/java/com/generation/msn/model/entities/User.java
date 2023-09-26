@@ -28,7 +28,7 @@ public class User extends BaseEntity
 	@OneToMany(mappedBy = "user1", fetch = FetchType.EAGER)
 	List<Friendship> friendshipsSender = new ArrayList<Friendship>(); 
 	@OneToMany(mappedBy = "user2", fetch = FetchType.EAGER)
-	List<Friendship> friendshipsReciver=new ArrayList<Friendship>();;
+	List<Friendship> friendshipsReciver=new ArrayList<Friendship>();
 	
 	
 	
