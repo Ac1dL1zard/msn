@@ -39,7 +39,7 @@ public class Friendship extends BaseEntity
 	private User user2;
 	
 	@OneToMany(mappedBy="friendship")
-	private List<Message> massages;
+	private List<Message> messages;
 	
 	
 	@Override

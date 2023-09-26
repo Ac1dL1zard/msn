@@ -57,9 +57,6 @@ public class MainController
 	@GetMapping("/homepage")
 	public String homepage(Model model)
 	{
-		User currentUser = (User) model.getAttribute("user");
-		model.addAttribute("allfriendship", currentUser.getAllFriendship());
-		model.addAttribute("allfriends", currentUser.getAllFriends());
 		return "homepage";
 	}
 	
@@ -68,8 +65,8 @@ public class MainController
 	{
 		User current = (User)model.getAttribute("user");
 		User friend = userRepo.findById(id).get();
-		Friendship f = friendRepo.findByUser1AndUser2(current,friend );
-		List<Message> messages = messRepo.findByFriendship_id(f.getId());
+		Friendship f = friendRepo.findByUser1AndUser2(current,friend);
+		List<Message> messages = f.getMessages();
 		model.addAttribute("messages", messages);
 		return "homepage";
 	}
@@ -112,7 +109,7 @@ public class MainController
 		f.setUser2(newFriend);
 		friendRepo.save(f);
 		model.addAttribute("successmessage", "Amico aggiunto con successo");
-		return "homepage";
+		return "redirect:/";
 	}
 	
 	@GetMapping("/register")
@@ -122,7 +119,7 @@ public class MainController
 	}
 	
 	@PostMapping("/addnewuser")
-	public String addNewUser(@ModelAttribute User user, Model model)
+	public String addNewUser(@ModelAttribute("newuser") User user, Model model)
 	{
 		User onDb = userRepo.findByMail(user.getMail());
 		if(onDb!=null)
