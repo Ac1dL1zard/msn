@@ -104,10 +104,10 @@
             <div class="chatcol">
                 <c:forEach var="message" items="${messages}">
                 	<c:if test="${message.getSender_nickname().equals(user.getNickname())}">
-                		<div style=" padding-right:30px">${message.getContent()}</div>
+                		<div style="padding-right:30px">${message.getContent()}</div>
                 	</c:if>
       	            <c:if test="${message.getSender_nickname().equals(friend.getNickname())}">
-                		<div style=" padding-left:30px">${message.getContent()}</div>
+                		<div style="padding-left:30px">${message.getContent()}</div>
       	            </c:if>
                 </c:forEach>
             </div>
