@@ -80,6 +80,7 @@
             }
             div.contact
             {}
+            
         </style> 
     </head>
     <body>
