@@ -1,6 +1,6 @@
 package com.generation.msn.controller;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,10 +72,10 @@ public class MainController
 	}
 	
 	@PostMapping("/sendmessage")
-	public String sendmessage(@ModelAttribute("message") Message message, int id, Model model)
+	public String sendmessage(@ModelAttribute("message") Message message, Model model)
 	{
 		messRepo.save(message);
-		model.addAttribute("id", id);
+		model.addAttribute("id", message.getFriendship().getUser2());
 		return "redirect:/openchat";
 	}
 	
@@ -104,11 +104,12 @@ public class MainController
 			}
 		}
 		Friendship f = new Friendship();
-		f.setStart_date_time(LocalDate.now());
+		f.setStart_date_time(LocalDateTime.now());
 		f.setUser1(current);
 		f.setUser2(newFriend);
 		friendRepo.save(f);
 		model.addAttribute("successmessage", "Amico aggiunto con successo");
+		current.getFriendshipsSender().add(f);
 		return "redirect:/";
 	}
 	

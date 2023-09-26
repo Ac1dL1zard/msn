@@ -1,6 +1,6 @@
 package com.generation.msn.model.entities;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class Friendship extends BaseEntity
 {
 
 	
-	private LocalDate start_date_time;	
+	private LocalDateTime start_date_time;	
 	
 	@ManyToOne (fetch = FetchType.EAGER)
 	@JoinColumn (name="user1_id")
