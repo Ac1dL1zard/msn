@@ -7,6 +7,9 @@ import com.generation.msn.library.BaseEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,6 +32,10 @@ public class User extends BaseEntity
 	List<Friendship> friendshipsSender = new ArrayList<Friendship>(); 
 	@OneToMany(mappedBy = "user2", fetch = FetchType.EAGER)
 	List<Friendship> friendshipsReciver=new ArrayList<Friendship>();
+	
+	@ManyToMany
+	@JoinTable(name="user_to_group" , joinColumns= @JoinColumn(name="user_id"), inverseJoinColumns=@JoinColumn(name="group_chat_id"))
+	List<GroupChat> groups = new ArrayList<GroupChat>();
 	
 	
 	
