@@ -114,4 +114,23 @@ public class MainController
 		model.addAttribute("successmessage", "Amico aggiunto con successo");
 		return "homepage";
 	}
+	
+	@GetMapping("/register")
+	public String register()
+	{
+		return "registration";
+	}
+	
+	@PostMapping("/addnewuser")
+	public String addNewUser(@ModelAttribute User user, Model model)
+	{
+		User onDb = userRepo.findByMail(user.getMail());
+		if(onDb!=null)
+		{
+			model.addAttribute("errormessage", "Profilo già esistente");
+			return "registration";
+		}
+		model.addAttribute("user", user);
+		return "redirect:/";
+	}
 }
