@@ -181,11 +181,25 @@
 				border:1px solid rgb(220,220,220);
 				text-indent:30px;
 			}
+			a.logout
+			{
+				position:relative;
+				top:5px;
+				left:8px;
+				text-decoration:none;
+				font-weight:bold;
+			}
+			img.logout
+			{
+				width:40px;
+			}
         </style> 
     </head>
     <body>
         <div class="mainframe">
-            <div class="bannertop"></div>
+            <div class="bannertop">
+            	  <a class="logout" href="logout"><img class="logout" alt="" src="http://localhost:8080/logout.png"></a>
+            </div>
             <div class="bannerleft"></div>
             <div class="chatcol">
             <br><br>
