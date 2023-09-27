@@ -36,7 +36,7 @@ public class Message extends BaseEntity
 	
 	@ManyToOne
 	@JoinColumn(name="group_chat_id")
-	GroupChat groupchat = new GroupChat();
+	GroupChat groupchat;
 	
 	
 	@Override

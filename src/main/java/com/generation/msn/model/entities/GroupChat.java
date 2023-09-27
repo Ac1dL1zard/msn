@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.generation.msn.library.BaseEntity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToMany;
@@ -25,7 +26,7 @@ import lombok.ToString;
 @ToString
 public class GroupChat extends BaseEntity
 {
-	@ManyToMany(mappedBy="groups")
+	@ManyToMany(mappedBy="groups", fetch = FetchType.EAGER)
 	List<User> groupusers = new ArrayList<User>();
 	
 	@OneToMany(mappedBy = "groupchat", fetch = FetchType.EAGER)
