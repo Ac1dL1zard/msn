@@ -95,13 +95,12 @@ public class MainController
 	}
 	
 	@PostMapping("/sendmessage")
-	public String sendmessage(@RequestParam("id") Integer id, @ModelAttribute("message") Message message, Model model)
+	public String sendmessage(@RequestParam("id_f") Integer id, @ModelAttribute("message") Message message, Model model)
 	{
 		Friendship f = friendRepo.findById(id).get();
 		
 		message.setFriendship(f);
 		message.setSending_date_time(LocalDateTime.now());
-		message.setId(0);
 		f.getMessages().add(message);
 		
 		messRepo.save(message);

@@ -220,9 +220,10 @@
             </div>
             <div class="msgbar">
             	<c:if test="${messages!=null}">
-	            	 <form:form action="sendmessage?id=${friendship.getId()}" method="post" modelAttribute="message">
+	            	 <form:form action="sendmessage" method="post" modelAttribute="message">
 	            		<input class="send" name="content" type="text" placeholder="Inizia a scrivere">
 	            		<input type="hidden" name="sender_nickname" value="${user.getNickname()}">
+	            		<input type="hidden" name="id_f" value="${friendship.getId()}">
 	            	  </form:form>
             	 </c:if>
             </div>
