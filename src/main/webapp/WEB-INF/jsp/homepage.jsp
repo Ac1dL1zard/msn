@@ -205,9 +205,12 @@
      
             </div>
             <div class="msgbar">
-            	 <form:form action="sendmessage" method="post" modelAttribute="message">
-            		<input class="send" type="text" placeholder="Inizia a scrivere">
-            	  </form:form>
+            	<c:if test="${messages!=null}">
+	            	 <form:form action="sendmessage?id=${friendship.getId()}" method="post" modelAttribute="message">
+	            		<input class="send" name="content" type="text" placeholder="Inizia a scrivere">
+	            		<input type="hidden" name="sender_nickname" value="${user.getNickname()}">
+	            	  </form:form>
+            	 </c:if>
             </div>
             
             
@@ -223,9 +226,11 @@
      						<a class="contactinfo"href="openchat?id=${friend.getId()}">
      							<b>${friend.getNickname()}</b>
      						</a>
-     						<p style="color:rgb(180,180,180);font-weight:normal;font-size:105;position:absolute;top:10px;"> 
-     							${messages.get(messages.size()-1).getSender_nickname()}:${messages.get(messages.size()-1).getContent()}
-     						</p>
+     						<c:if test="${messages.size()>0}">
+	     						<p style="color:rgb(180,180,180);font-weight:normal;font-size:105;position:absolute;top:10px;"> 
+	     							${messages.get(messages.size()-1).getSender_nickname()}:${messages.get(messages.size()-1).getContent()}
+	     						</p>
+	     					</c:if>
      					</div>
      				</c:forEach>
                 </div>

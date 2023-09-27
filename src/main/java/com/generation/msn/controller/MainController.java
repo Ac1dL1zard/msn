@@ -1,5 +1,6 @@
 package com.generation.msn.controller;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class MainController
 	}
 	
 	@GetMapping("/homepage")
-	public String homepage()
+	public String homepage(Model model)
 	{
 		return "homepage";
 	}
@@ -67,16 +68,23 @@ public class MainController
 		User friend = userRepo.findById(id).get();
 		Friendship f = friendRepo.findByUser1AndUser2(current,friend);
 		List<Message> messages = f.getMessages();
+		model.addAttribute("friendship", f);
 		model.addAttribute("messages", messages);
 		return "homepage";
 	}
 	
 	@PostMapping("/sendmessage")
-	public String sendmessage(@ModelAttribute("message") Message message, Model model)
+	public String sendmessage(@RequestParam("id") Integer id, @ModelAttribute("message") Message message, Model model)
 	{
+		Friendship f = friendRepo.findById(id).get();
+		
+		message.setFriendship(f);
+		message.setSending_date_time(LocalDate.now());
+		message.setId(0);
+		f.getMessages().add(message);
+		
 		messRepo.save(message);
-		model.addAttribute("id", message.getFriendship().getUser2());
-		return "redirect:/openchat";
+		return "redirect:/openchat?id=" + message.getFriendship().getUser2().getId();
 	}
 	
 	@GetMapping("/addfriend")
