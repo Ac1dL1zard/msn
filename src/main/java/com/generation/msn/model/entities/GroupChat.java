@@ -29,7 +29,7 @@ public class GroupChat extends BaseEntity
 	List<User> groupusers = new ArrayList<User>();
 	
 	@OneToMany(mappedBy = "groupchat", fetch = FetchType.EAGER)
-	List<GroupMessage> groupmessages =new ArrayList<GroupMessage>();
+	List<Message> groupmessages =new ArrayList<Message>();
 	
 	@Override
 	public List<String> getErrors() {

@@ -1,6 +1,7 @@
 package com.generation.msn.model.entities;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,11 +28,15 @@ public class Message extends BaseEntity
 {
 	
 	private String content,sender_nickname;
-	private LocalDate sending_date_time;	
+	private LocalDateTime sending_date_time;	
 	
 	@ManyToOne
 	@JoinColumn(name="friendship_id")
 	Friendship friendship;
+	
+	@ManyToOne
+	@JoinColumn(name="group_chat_id")
+	GroupChat groupchat = new GroupChat();
 	
 	
 	@Override

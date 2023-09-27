@@ -91,6 +91,27 @@
                 font-size: 88%;
                 color:red;
             }
+            div.register
+            {
+            	position:relative;
+            	 left: 25px;
+            	width:270px;
+                height:30px;
+                text-align: center;
+            }
+			button
+			{
+				position:relative;
+				top:12px;
+            	width:270px;
+                height:30px;
+                text-align: center;
+                border-radius: 4px;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 95%;
+                border:1px solid rgb(240,240,240);
+                border-bottom:1px solid rgb(180,180,180);
+			}
         </style> 
     </head>
     <body>
@@ -108,6 +129,9 @@
                     <input type="text" name="password" type="password" placeholder="Inserisci password">
                     <input class="submit" type="submit" value="Accedi">
                 </form:form>
+                <div class="register">
+               		 <a href="/register"><button>Registrati</button></a>
+                </div>
                 <div class="contactlist">
                     <div class="message">
                         ${errormessage}
