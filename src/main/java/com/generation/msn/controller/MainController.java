@@ -1,5 +1,6 @@
 package com.generation.msn.controller;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -13,14 +14,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.generation.msn.model.entities.Friendship;
+import com.generation.msn.model.entities.GroupChat;
 import com.generation.msn.model.entities.Message;
 import com.generation.msn.model.entities.User;
 import com.generation.msn.model.repository.FriendshipRepository;
+import com.generation.msn.model.repository.GroupChatRepository;
 import com.generation.msn.model.repository.MessageRepository;
 import com.generation.msn.model.repository.UserRepository;
 
 @Controller
-@SessionAttributes("user")
+@SessionAttributes({"user", "cmd"})
 public class MainController 
 {
 	@Autowired
@@ -29,6 +32,9 @@ public class MainController
 	FriendshipRepository friendRepo;
 	@Autowired
 	MessageRepository messRepo;
+	@Autowired
+	GroupChatRepository groupRepo;
+	
 	
 	@GetMapping("/")
 	public String initialPage(Model model)
@@ -55,8 +61,15 @@ public class MainController
 	}
 	
 	@GetMapping("/homepage")
-	public String homepage(Model model)
+	public String homepage()
 	{
+		return "homepage";
+	}
+	
+	@GetMapping("changechatview")
+	public String chengeChatView(@RequestParam String cmd, Model model)
+	{
+		model.addAttribute("cmd", cmd);
 		return "homepage";
 	}
 	
@@ -68,6 +81,15 @@ public class MainController
 		Friendship f = friendRepo.findByUser1AndUser2(current,friend);
 		List<Message> messages = f.getMessages();
 		model.addAttribute("friendship", f);
+		model.addAttribute("messages", messages);
+		return "homepage";
+	}
+	
+	@GetMapping("/opengroupchat")
+	public String openGroupChat(@RequestParam int id, Model model)
+	{
+		GroupChat group = groupRepo.findById(id).get();
+		List<Message> messages = group.getGroupmessages();
 		model.addAttribute("messages", messages);
 		return "homepage";
 	}
@@ -146,6 +168,61 @@ public class MainController
 	public String logout(Model model)
 	{
 		model.addAttribute("user", new User());
+		return "redirect:/";
+	}
+	
+	@GetMapping("/creategroup")
+	public String createGroup()
+	{
+		return"groupform";
+	}
+	
+	@PostMapping("/savegroupform")
+	public String saveGroup(@ModelAttribute("group") GroupChat group ,Model model)
+	{
+		User user = (User)model.getAttribute("user");
+		group.setCreationDate(LocalDate.now());
+		boolean saved = group.addUser(user);
+		if(saved)
+		{
+			groupRepo.save(group);
+			model.addAttribute("successmessage", "Gruppo creato con successo");
+		}
+		else
+		{
+			model.addAttribute("errormessage", "Non sono riuscito a creare il gruppo :(");
+		}
+		
+		return "redirect:/";
+	}
+	
+	@GetMapping("addtogroup")
+	public String addToGroup(@RequestParam int id, Model model)
+	{
+		model.addAttribute("idgroup", id);
+		return "addusertogroupform";
+	}
+	
+	@PostMapping("saveusertogroupform")
+	public String saveToGroup(@RequestParam int id ,@RequestParam String mail, Model model)
+	{
+		User newU = userRepo.findByMail(mail);
+		if(newU==null)
+		{
+			model.addAttribute("errormessage", "Non esiste uno user con questa mail");
+			return "addusertogroupform";
+		}
+		GroupChat group = groupRepo.findById(id).get();
+		if(group.addUser(newU))
+		{
+			model.addAttribute("successmessage", "Persona aggiunta con successo al gruppo");
+			groupRepo.save(group); // potrebbe essere qua il problema
+		}
+		else
+		{
+			model.addAttribute("errormessage", "La persona è già presente nel gruppo");
+		}
+		
 		return "redirect:/";
 	}
 }

@@ -1,11 +1,11 @@
 package com.generation.msn.model.entities;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.generation.msn.library.BaseEntity;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToMany;
@@ -26,6 +26,9 @@ import lombok.ToString;
 @ToString
 public class GroupChat extends BaseEntity
 {
+	private String name;
+	private LocalDate creationDate;
+	
 	@ManyToMany(mappedBy="groups", fetch = FetchType.EAGER)
 	List<User> groupusers = new ArrayList<User>();
 	
@@ -36,6 +39,16 @@ public class GroupChat extends BaseEntity
 	public List<String> getErrors() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public boolean addUser(User u)
+	{
+		if(!groupusers.contains(u))
+		{	
+			groupusers.add(u);
+			return true;
+		}
+		return false;
 	}
 
 }
