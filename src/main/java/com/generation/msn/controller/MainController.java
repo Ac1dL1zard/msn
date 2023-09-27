@@ -1,6 +1,5 @@
 package com.generation.msn.controller;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -79,7 +78,7 @@ public class MainController
 		Friendship f = friendRepo.findById(id).get();
 		
 		message.setFriendship(f);
-		message.setSending_date_time(LocalDate.now());
+		message.setSending_date_time(LocalDateTime.now());
 		message.setId(0);
 		f.getMessages().add(message);
 		
@@ -140,6 +139,13 @@ public class MainController
 		User u=userRepo.findById(user.getId()).get();
 		System.out.println(user.toString());
 		model.addAttribute("user", u);
+		return "redirect:/";
+	}
+	
+	@GetMapping("/logout")
+	public String logout(Model model)
+	{
+		model.addAttribute("user", new User());
 		return "redirect:/";
 	}
 }
