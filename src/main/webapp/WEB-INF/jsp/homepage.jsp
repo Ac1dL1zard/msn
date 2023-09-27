@@ -241,9 +241,9 @@
      						<a class="contactinfo"href="openchat?id=${friend.getId()}">
      							<b>${friend.getNickname()}</b>
      						</a>
-     						<c:if test="${messages.size()>0}">
+     						<c:if test="${user.getFriendship(friend).getMessages().size()>0}">
 	     						<p style="color:rgb(180,180,180);font-weight:normal;font-size:105;position:absolute;top:10px;"> 
-	     							${messages.get(messages.size()-1).getSender_nickname()}:${messages.get(messages.size()-1).getContent()}
+	     							${user.getFriendship(friend).getLastMessage().getSender_nickname()}:${user.getFriendship(friend).getLastMessage().getContent()}
 	     						</p>
 	     					</c:if>
      					</div>

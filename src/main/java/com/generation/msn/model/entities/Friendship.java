@@ -38,7 +38,7 @@ public class Friendship extends BaseEntity
 	@ToString.Exclude
 	private User user2;
 	
-	@OneToMany(mappedBy="friendship")
+	@OneToMany(mappedBy="friendship", fetch = FetchType.EAGER)
 	private List<Message> messages;
 	
 	
@@ -51,5 +51,10 @@ public class Friendship extends BaseEntity
 		 return res;
 	}
 	
-
+	public Message getLastMessage()
+	{
+		if(messages.size() > 0)
+			return messages.get(messages.size() - 1);
+		return null;
+	}
 }

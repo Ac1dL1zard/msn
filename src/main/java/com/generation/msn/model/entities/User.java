@@ -68,6 +68,25 @@ public class User extends BaseEntity
 		return allFriends;
 	}
 	
+	public Friendship getFriendship(User other)
+	{
+		int idFriend = other.getId();
+		for(Friendship f : getAllFriendship())
+			if
+			(
+				(idFriend==f.getUser2().getId() 
+				&& 
+				this.id==f.getUser1().getId())
+				||
+				(this.id==f.getUser2().getId()
+				&&
+				idFriend==f.getUser1().getId())
+			)
+				return f;
+		return null;
+				
+	}
+	
 	
 	@Override
 	public List<String> getErrors() 

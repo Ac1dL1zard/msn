@@ -8,6 +8,7 @@ import java.util.List;
 import com.generation.msn.library.BaseEntity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
@@ -30,7 +31,7 @@ public class Message extends BaseEntity
 	private String content,sender_nickname;
 	private LocalDateTime sending_date_time;	
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="friendship_id")
 	Friendship friendship;
 	

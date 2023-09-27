@@ -2,7 +2,9 @@ package com.generation.msn.controller;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -62,7 +64,7 @@ public class MainController
 	
 	@GetMapping("/homepage")
 	public String homepage()
-	{
+	{	
 		return "homepage";
 	}
 	
@@ -82,7 +84,8 @@ public class MainController
 		List<Message> messages = f.getMessages();
 		model.addAttribute("friendship", f);
 		model.addAttribute("messages", messages);
-		return "homepage";
+		
+ 		return "homepage";
 	}
 	
 	@GetMapping("/opengroupchat")
